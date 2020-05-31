@@ -5,8 +5,6 @@ import java.util.LinkedList;
 
 public abstract class PGraph<D extends PDevice<S, E, M>, S, E, M> {
 
-	public static boolean logMessageCount = false;
-	
 	public static int totalSteps = 0;
 	
 	public final ArrayList<D> devices = new ArrayList<>();
@@ -31,33 +29,37 @@ public abstract class PGraph<D extends PDevice<S, E, M>, S, E, M> {
 		devices.get(from).addLabelledEdge(edge, pin, devices.get(to));
 	}
 
-	public void go() {
+	public void init() {
 		for(PDevice<S, E, M> dev : devices) {
 			dev.init();
 		}
-		boolean active = true;
-		do {
-			active = false;
+	}
+	
+	public boolean step() {
+		boolean active = false;
+		for(PDevice<S, E, M> dev : devices) {
+			active |= dev.update();
+		}
+		if(!active) {
+			totalSteps++;
 			for(PDevice<S, E, M> dev : devices) {
-				active |= dev.update();
+				active |= dev.step();
 			}
-			if(!active) {
-				totalSteps++;
-				for(PDevice<S, E, M> dev : devices) {
-					active |= dev.step();
-				}
+		}
+		if(!active) {
+			hostMessages.clear();
+			for(PDevice<S, E, M> dev : devices) {
+				PDevice<S, E, M>.PMessage m = dev.createPMessage();
+				active |= !dev.finish(m.msg);
+				hostMessages.add(m);
 			}
-			if(!active) {
-				hostMessages.clear();
-				for(PDevice<S, E, M> dev : devices) {
-					PDevice<S, E, M>.PMessage m = dev.createPMessage();
-					active |= !dev.finish(m.msg);
-					hostMessages.add(m);
-				}
-			}
-			if(logMessageCount)
-				System.out.printf("Messages sent: %.1fM\n", PDevice.totalMessageCount/1000000.0);
-		} while(active);
+		}
+		return active;
+	}
+	
+	public void go() {
+		init();
+		while(step()) {}
 	}
 	
 }

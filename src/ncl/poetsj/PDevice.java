@@ -2,9 +2,11 @@ package ncl.poetsj;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Random;
 
 public abstract class PDevice<S, E, M> {
 
+	public static boolean randomMessageOrder = true;
 	public static int totalMessageCount = 0;
 	
 	public static final int NO = 0; 
@@ -50,9 +52,17 @@ public abstract class PDevice<S, E, M> {
 		}
 	}
 	
+	private static final Random random = new Random();
+	
 	protected boolean update() {
 		while(!mailbox.isEmpty()) {
-			PMessage m = mailbox.pop();
+			PMessage m;
+			if(randomMessageOrder) {
+				int index = random.nextInt(mailbox.size());
+				m = mailbox.remove(index);
+			}
+			else
+				m = mailbox.pop();
 			recv(m.msg, m.edge);
 		}
 		if(readyToSend!=NO) {
