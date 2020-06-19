@@ -174,6 +174,7 @@ public class DenQSeismicDevice extends PDevice<DenQSeismicState, Void, DenQSeism
 				}
 			}
 		}
+		readyToSend = NO;
 	}
 
 	@Override
