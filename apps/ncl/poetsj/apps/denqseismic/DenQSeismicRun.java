@@ -1,7 +1,7 @@
 package ncl.poetsj.apps.denqseismic;
 
 import static java.lang.System.*;
-import static ncl.poetsj.apps.qseismic.QSeismicDevice.*;
+import static ncl.poetsj.apps.denqseismic.DenQSeismicDevice.*;
 
 import java.awt.Color;
 import java.io.DataInputStream;
