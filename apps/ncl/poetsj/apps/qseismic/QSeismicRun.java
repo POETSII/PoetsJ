@@ -4,10 +4,10 @@ import static java.lang.System.*;
 import static ncl.poetsj.apps.qseismic.QSeismicDevice.*;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.Scanner;
 
-import com.sun.glass.events.KeyEvent;
 import com.xrbpowered.zoomui.GraphAssist;
 import com.xrbpowered.zoomui.KeyInputHandler;
 import com.xrbpowered.zoomui.UIContainer;

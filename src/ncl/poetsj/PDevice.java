@@ -7,6 +7,7 @@ import java.util.Random;
 public abstract class PDevice<S, E, M> {
 
 	public static boolean randomMessageOrder = true;
+	public static boolean logMessages = false;
 	public static int totalMessageCount = 0;
 	
 	public static final int NO = 0; 
@@ -26,6 +27,7 @@ public abstract class PDevice<S, E, M> {
 		public E edge;
 	}
 	
+	public int deviceId;
 	public int readyToSend = NO;
 	
 	public final S s = createState();
@@ -63,11 +65,15 @@ public abstract class PDevice<S, E, M> {
 			}
 			else
 				m = mailbox.pop();
+			if(logMessages)
+				System.out.printf("%d:recv(%s)\n", deviceId, m.msg.toString());
 			recv(m.msg, m.edge);
 		}
 		if(readyToSend!=NO) {
 			M msg = createMessage();
 			send(msg);
+			if(logMessages)
+				System.out.printf("%d:send(%s)\n", deviceId, msg.toString());
 			for(PEdge edge : edges.values()) {
 				PMessage m = new PMessage();
 				m.msg = msg;

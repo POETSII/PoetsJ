@@ -13,7 +13,6 @@ import ncl.poetsj.apps.seismic.SeismicDevice.SeismicState;
 
 public class Seismic3DRun {
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		try {
 			if(args.length!=1) {

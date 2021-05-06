@@ -13,8 +13,10 @@ public abstract class PGraph<D extends PDevice<S, E, M>, S, E, M> {
 	protected abstract D createDevice();
 	
 	public int newDevice() {
-		devices.add(createDevice());
-		return devices.size()-1;
+		D dev = createDevice();
+		dev.deviceId = devices.size();
+		devices.add(dev);
+		return dev.deviceId;
 	}
 	
 	public int numDevices() {
