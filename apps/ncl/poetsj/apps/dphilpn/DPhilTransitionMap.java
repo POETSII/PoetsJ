@@ -14,8 +14,6 @@ import ncl.poetsj.apps.pipelinepn.PPNDevice;
 
 public abstract class DPhilTransitionMap {
 
-	private static int offs;
-	
 	public static void create(int steps) {
 		// Places:
 		// 0: ccw_before_put_left_fork
@@ -49,7 +47,7 @@ public abstract class DPhilTransitionMap {
 		tileInitPlaces = 20;
 
 		// Output mapping:
-		offs = 0;
+		int offs = 0;
 		tOutMap = new OutMap[outPlaces];
 		tOutMap[offs++] = new OutMap(-1, 37);
 		tOutMap[offs++] = new OutMap(-1, 35);

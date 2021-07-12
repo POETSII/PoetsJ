@@ -136,6 +136,7 @@ public class PPNDevice extends PDevice<PPNState, Void, PPNMessage> {
 		if(logMessages)
 			System.out.printf("%d:step\n", deviceId);
 		
+		int tCount = 0;
 		for(int ti = 0; ti<MAX_TRANSITIONS; ti++) {
 			Transition t = tmap[ti];
 			if(t.type==1) {
@@ -161,10 +162,12 @@ public class PPNDevice extends PDevice<PPNState, Void, PPNMessage> {
 			else {
 				break;
 			}
+			tCount++;
 			s.time++;
 			if(s.time>=s.timeLimit)
 				break;
 		}
+		System.out.printf("tCount=%d\n", tCount);
 
 		s.countChanges = 0;
 		for(int p = 0; p<MAX_PLACES; p++)

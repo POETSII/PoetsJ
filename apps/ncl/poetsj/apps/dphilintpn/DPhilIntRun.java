@@ -1,9 +1,12 @@
-package ncl.poetsj.apps.dphilpn;
+package ncl.poetsj.apps.dphilintpn;
 
 import static java.lang.System.out;
 import static ncl.poetsj.apps.dphilpn.DPhilDevice.localPlaces;
 import static ncl.poetsj.apps.dphilpn.DPhilDevice.outPlaces;
 import static ncl.poetsj.apps.dphilpn.DPhilDevice.transitions;
+import static ncl.poetsj.apps.dphilpn.DPhilRun.initPlaces;
+import static ncl.poetsj.apps.dphilpn.DPhilRun.tOutMap;
+import static ncl.poetsj.apps.dphilpn.DPhilRun.tileInitPlaces;
 
 import java.awt.Color;
 
@@ -15,19 +18,16 @@ import com.xrbpowered.zoomui.swing.SwingFrame;
 import com.xrbpowered.zoomui.swing.SwingWindowFactory;
 
 import ncl.poetsj.PGraph;
-import ncl.poetsj.apps.dphilpn.DPhilDevice.DPhilGraph;
+import ncl.poetsj.apps.dphilintpn.DPhilIntDevice.DPhilIntGraph;
 import ncl.poetsj.apps.dphilpn.DPhilDevice.DPhilMessage;
 import ncl.poetsj.apps.dphilpn.DPhilDevice.DPhilState;
-import ncl.poetsj.apps.dphilpn.DPhilDevice.OutMap;
+import ncl.poetsj.apps.dphilpn.DPhilTransitionMap;
+import ncl.poetsj.apps.dphilpn.PipelineTransitionMap;
 
-public class DPhilRun {
+public class DPhilIntRun {
 
 	public static boolean display = true;
 	
-	public static int[] initPlaces;
-	public static int tileInitPlaces;
-	public static OutMap[] tOutMap;
-
 	public static final int DEFAULT_NUM_DEVS = 1;
 	public static final int DEFAULT_TIME_LIMIT = 100;
 
@@ -37,12 +37,12 @@ public class DPhilRun {
 	public static int[] highlightPlaces = {7, 13};
 	
 	public static class DPhilDisplay extends UIContainer {
-		public final DPhilGraph graph;
+		public final DPhilIntGraph graph;
 		public boolean done = false;
 		public boolean running = false;
 		public final Thread thread;
 		
-		public DPhilDisplay(UIContainer parent, DPhilGraph graph) {
+		public DPhilDisplay(UIContainer parent, DPhilIntGraph graph) {
 			super(parent);
 			this.graph = graph;
 			graph.init();
@@ -149,7 +149,7 @@ public class DPhilRun {
 		startAll = System.currentTimeMillis();
 
 		out.printf("Creating graph...\n");
-		DPhilGraph graph = new DPhilGraph();
+		DPhilIntGraph graph = new DPhilIntGraph();
 		for(int i=0; i<numDevs; i++) {
 			graph.newDevice();
 		}
