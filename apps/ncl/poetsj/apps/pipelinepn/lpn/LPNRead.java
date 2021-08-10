@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class LPNRead {
 
-	public static final String path = "../Poets.Temp/pipeline_tile.lpn";
-	
 	public static class OutMap {
 		public int dev;
 		public Place place;
@@ -197,10 +195,6 @@ public class LPNRead {
 		}
 		for(Transition t : transitions)
 			System.out.println(t);
-	}
-	
-	public static void main(String[] args) {
-		new LPNRead().load(path).print();
 	}
 
 }
