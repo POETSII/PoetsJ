@@ -1,4 +1,4 @@
-package ncl.poetsj.apps.pipelinepn;
+package ncl.outparse.collectdata;
 
 import java.io.File;
 
@@ -13,7 +13,7 @@ import ncl.outparse.OutParse.Lookup;
 
 public class CollectPPNResults {
 
-	private static final String pathBase = "../../../Workspace/VM/shared/poets/21jul/res/";
+	private static final String pathBase = Utils.readFile(new File("poets_data_path.txt"))+"/21jul/res/";
 	private static final String[] paths = {"0730", "0723", "0722", "0712"};
 	private static final String statFmt = "%s_out_stats_%d.txt";
 	private static final String outFmt = "%s_out_%d.txt";
