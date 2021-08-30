@@ -19,6 +19,7 @@ public class LPNRead {
 		public boolean marked = false;
 		public boolean choice = false;
 		public OutMap out = null;
+		public ArrayList<Transition> tout = new ArrayList<>();
 		@Override
 		public String toString() {
 			String s = String.format("P[%d] %s%s", index, marked ? "*" : "", name);
@@ -150,8 +151,11 @@ public class LPNRead {
 					}
 					else {
 						Place p = getPlaceByName(s[0]);
-						for(int i=1; i<s.length; i++)
-							transitionMap.get(s[i]).in.add(p);
+						for(int i=1; i<s.length; i++) {
+							t = transitionMap.get(s[i]); 
+							t.in.add(p);
+							p.tout.add(t);
+						}
 						if(s.length>2)
 							p.choice = true;
 					}

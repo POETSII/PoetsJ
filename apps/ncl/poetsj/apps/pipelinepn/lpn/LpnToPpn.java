@@ -7,8 +7,9 @@ import ncl.poetsj.apps.pipelinepn.lpn.LPNRead.Transition;
 
 public class LpnToPpn {
 
-	public static final String path = "../Poets.Temp/pipeline_tile.lpn";
-	//public static final String path = "../Poets.Temp/dphil_tile.pn.lpn";
+	public static final String path = "../Poets.Temp/hybrid_tile.tlpn";
+	//public static final String path = "../Poets.Temp/pipeline_tile.tlpn";
+	//public static final String path = "../Poets.Temp/dphil_tile.tlpn";
 	
 	public static int transitionAlign = 1;
 	
@@ -218,7 +219,7 @@ public class LpnToPpn {
 
 	public static void main(String[] args) {
 		//printTmapJava(new LPNRead().load(path), 2);
-		printTmapGenC("PIPE", new LPNRead().load(path));
+		printTmapGenC("HYPE", new LPNRead().load(path));
 		//printTmapC("PIPE", new LPNRead().load(path), 46);
 		//printPInitC("PIPE", new LPNRead().load(path), 46);
 	}

@@ -21,7 +21,6 @@ import ncl.poetsj.PGraph;
 import ncl.poetsj.apps.dphilintpn.DPhilIntDevice.DPhilIntGraph;
 import ncl.poetsj.apps.dphilpn.DPhilDevice.DPhilMessage;
 import ncl.poetsj.apps.dphilpn.DPhilDevice.DPhilState;
-import ncl.poetsj.apps.dphilpn.DPhilTransitionMap;
 import ncl.poetsj.apps.dphilpn.PipelineTransitionMap;
 
 public class DPhilIntRun {
